@@ -1,22 +1,19 @@
 {
   "name": "express-memo",
-  "version": "1.0.0",
-  "description": "---",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HuangHongRui/Express-memo.git"
+  "dependencies": {
+    "debug": "~2.6.3",
+    "ejs": "~2.5.6",
+    "express": "~4.15.2",
+    "serve-favicon": "^2.4.3"
   },
-  "keywords": [
-    "Express-memo-project"
-  ],
-  "author": "HuangHongRui",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HuangHongRui/Express-memo/issues"
-  },
-  "homepage": "https://github.com/HuangHongRui/Express-memo#readme"
+  "devDependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "morgan": "^1.8.2"
+  }
 }
