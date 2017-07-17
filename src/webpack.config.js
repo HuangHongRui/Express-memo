@@ -13,7 +13,7 @@ module.exports = {
         rules: [{
             test: /\.less$/,
             // use: ExtractTextPlugin.extract({
-                    // fallback: "style-loader",
+            //         fallback: "style-loader",
                     use: ["style-loader", "css-loader", "less-loader"]
                 // }) //把 css 抽离出来生成一个文件
         }]
@@ -36,7 +36,7 @@ module.exports = {
         //             autoprefixer(),
         //         ]
         //     }
-        // })
+        // }),
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         warnings: false,

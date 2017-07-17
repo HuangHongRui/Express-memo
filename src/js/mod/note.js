@@ -110,7 +110,7 @@ Note.prototype = {                        //原型添加方法
         note: msg
       }).done(function(ret){          //请求完成数据到来
       if(ret.status === 0){           //状态成功
-        Toast('update success');      //提示
+        Toast('更新成功 | UPDATE SUCCESS');      //提示
       }else{
         Toast(ret.errorMsg);          //提示失败
       }
@@ -118,15 +118,15 @@ Note.prototype = {                        //原型添加方法
   },
 
     add: function (msg){                  //添加
-    console.log('addd...');               //
+    // console.log('addd...');               //
     var self = this;
     $.post('/api/notes/add', {note: msg}) //请求，数据内容为msg
       .done(function(ret){                //数据到来
         if(ret.status === 0){
-          Toast('add success');           //成功
-        }else{                            
+          Toast('新增成功 | ADD SUCCESS');           //成功
+        }else{
           self.$note.remove();            //移除元素
-          Event.fire('waterfall')         //触发瀑布流事件
+          Event.fire('waterfall');         //触发瀑布流事件
           Toast(ret.errorMsg);            //提示
         }
       });
@@ -138,7 +138,7 @@ Note.prototype = {                        //原型添加方法
     $.post('/api/notes/delete', {id: this.id})  //请求数据，内容Id
       .done(function(ret){                      //数据
         if(ret.status === 0){                   //成功
-          Toast('delete success');              //提示
+          Toast('删除成功 | DELETE SUCCESS');    //提示
           self.$note.remove();                  //删除
           Event.fire('waterfall')               //事件瀑布流
         }else{  
