@@ -6,10 +6,9 @@ var express = require('express');
 var router = express.Router();
 var passport =require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
-
 passport.serializeUser(function(user, done) {
     console.log('--serializeUser--');
-    console.log(user);
+    // console.log(user);
     done(null, user);
 });
 
@@ -19,15 +18,13 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GitHubStrategy({
-    clientID: 'b7bfd7fcc56fdb76ad7f',
-    clientSecret: '02de06a1c53b5d6aa9d5d805af6b936b42381ddd',
-    callbackURL: "http://note.ruoyu.site/auth/github/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-    // User.findOrCreate({ githubId: profile.id }, function (err, user) {
-    // });
-    done(null, profile);
-}
+        clientID: '600246c4be6c231d5210',
+        clientSecret: '3eeb85b722458949b52ea8db9fbf5a6c00899366',
+        callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+        done(null, profile)
+    }
 ));
 
 router.get('/github',
@@ -36,6 +33,8 @@ router.get('/github',
 router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     function(req, res) {
+        // console.log('succsee....');
+        // console.log(req.user);
         req.session.user = {
             id: req.user.id,
             username: req.user.displayName || req.user.username,
@@ -44,5 +43,8 @@ router.get('/github/callback',
         };
         res.redirect('/');
 });
-
+router.get('/logout', function(req, res){
+    req.session.destroy();
+    res.redirect('/')
+});
 module.exports = router;

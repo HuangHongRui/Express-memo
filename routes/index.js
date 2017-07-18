@@ -3,8 +3,24 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  var loginData;
+  if (req.session.user) {
+    var loginData = {
+      isLogin: true,
+      user: {
+        avatar: req.session.user.avatar,
+        username: req.session.user.username
+        }
+      }
+  } else {
+     loginData = {
+      isLogin: false
+    }
+  }
+    res.render('index', loginData );
+
 });
+module.exports = router;
 
 // router.get('/', function(req, res, next) {
 //   var data;
@@ -12,7 +28,7 @@ router.get('/', function(req, res, next) {
 //     data = {
 //       isLogin: true,
 //       user: req.session.user
-//     }	
+//     }
 //   }else{
 //     data = {
 //       isLogin: false
@@ -21,5 +37,3 @@ router.get('/', function(req, res, next) {
 //   console.log(data)
 //   res.render('index', data);
 // });
-
-module.exports = router;

@@ -29,9 +29,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(function(req, res, next){
-	console.log(req)
+	// console.log(req)
 	next()	
-})
+});
 
 app.use('/', index);
 app.use('/auth', auth);
