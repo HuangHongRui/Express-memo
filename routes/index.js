@@ -1,26 +1,26 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express');             //require
+var router = express.Router();                //新对象
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
-  var loginData;
-  if (req.session.user) {
+  var loginData;                            //登录变量
+  if (req.session.user) {                   //如果有登陆者
     var loginData = {
-      isLogin: true,
+      isLogin: true,                        //登录状态true
       user: {
-        avatar: req.session.user.avatar,
-        username: req.session.user.username
+        avatar: req.session.user.avatar,    //显示头像
+        username: req.session.user.username //显示名
         }
       }
   } else {
      loginData = {
-      isLogin: false
+      isLogin: false                        //否则登录状态false
     }
   }
-    res.render('index', loginData );
+    res.render('index', loginData );        //渲染
 
 });
-module.exports = router;
+module.exports = router;                    //出口
 
 // router.get('/', function(req, res, next) {
 //   var data;

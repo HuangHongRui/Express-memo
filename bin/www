@@ -54,32 +54,31 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
+  if (error.syscall !== 'listen') {     //描述失败的系统调用|字符串
+    throw error;                        //抛出错误
   }
 
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+    case 'EACCES':                      //(拒绝访问): 试图以被一个文件的访问权限禁止的方式访问一个文件
+      console.error(bind + ' 拒绝访问,需要提升权限');
       process.exit(1);
       break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
+    case 'EADDRINUSE':                  //(地址已被使用): 试图绑定一个服务器（net、http 或 https）到本地地址，但因另一个本地系统的服务器已占用了该地址而导致失败。
+      console.error(bind + ' 端口被占用.');
+      process.exit(1);                  //结束状态
       break;
     default:
-      throw error;
+      throw error;                      //抛错
   }
 }
 
 /**
- * Event listener for HTTP server "listening" event.
- */
+ * 事件侦听器为HTTP服务器“侦听”事件。请求提升权限
+ *****************************************/
 
 function onListening() {
   var addr = server.address();

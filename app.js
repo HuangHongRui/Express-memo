@@ -1,55 +1,53 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var passport = require('passport');
-var session = require('express-session');
-var index = require('./routes/index');
+var express = require('express');               //请求express
+var path = require('path');                     //请求path
+var favicon = require('serve-favicon');         //服务图标中间件
+// var logger = require('morgan');                 //HTTP请求记录器中间件
+var cookieParser = require('cookie-parser');    //解析Cookie并填充req.cookies由cookie名键入的对象
+var bodyParser = require('body-parser');        //Node.js正文解析中间件
+var passport = require('passport');             //兼容认证中间件
+var session = require('express-session');       //会话中间件
+
+var index = require('./routes/index');          //路由
 var api = require('./routes/api');
 var auth = require('./routes/auth');
-// var all = require('./routes/all');
-
+var all = require('./routes/all');
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// 引擎设置
+app.set('views', path.join(__dirname, 'views'));//
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
+// app.use(logger('dev'));
+// app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'Thisskey123321'}));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(session({secret: 'Thisskey123321'}));    //加密
+app.use(passport.initialize());                  //认证初始
+app.use(passport.session());                     //认证
 
-app.use(function(req, res, next){
-	// console.log(req)
-	next()	
-});
+// app.use(function(req, res, next){
+// 	// console.log(req)
+// 	next()
+// });
 
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/api', api);
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+
+app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+// 错误处理
+app.use((err, req, res, next) => {
+  //提示本地开发错误
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // 渲染错误页面
   res.status(err.status || 500);
   res.render('error');
 });

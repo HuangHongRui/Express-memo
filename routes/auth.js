@@ -2,49 +2,51 @@
 /**
  * Created by huanghongrui on 17-7-17.
  */
-var express = require('express');
-var router = express.Router();
-var passport =require('passport');
-var GitHubStrategy = require('passport-github').Strategy;
-passport.serializeUser(function(user, done) {
-    console.log('--serializeUser--');
-    // console.log(user);
-    done(null, user);
-});
+var express = require('express');                //
+var passport =require('passport');               //
+var router = express.Router();                   //创建一个新的路由对象
+var GitHubStrategy = require('passport-github').Strategy;   //github战略-。-
 
-passport.deserializeUser(function(obj, done) {
-    console.log('--deserialzieUser--');
-    done(null, obj);
-});
+// passport.serializeUser((user, done) => {
+//     console.log('---serializeUser---');
+//     done(null, user);
+// });
+//
+// passport.deserializeUser((obj, done) => {
+//     console.log('---deserializeUser---');
+//     done(null, obj);
+// });
 
 passport.use(new GitHubStrategy({
-        clientID: '600246c4be6c231d5210',
-        clientSecret: '3eeb85b722458949b52ea8db9fbf5a6c00899366',
-        callbackURL: "http://memo.luckyman.xyz/auth/github/callback"
+        clientID: '600246c4be6c231d5210',                               //id
+        clientSecret: '3eeb85b722458949b52ea8db9fbf5a6c00899366',       //秘钥
+        callbackURL: "http://memo.luckyman.xyz/auth/github/callback"    //回调
     },
-    function(accessToken, refreshToken, profile, done) {
+    (accessToken, refreshToken, profile, done) => {
         done(null, profile)
     }
 ));
 
+router.get('/logout', (req, res) => {           //退出请求
+    req.session.destroy();                      //删除记录
+    res.redirect('/');                          //重定向到根目录
+});
+
 router.get('/github',
-    passport.authenticate('github'));
+    passport.authenticate('github'));           //有效
 
 router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
-    function(req, res) {
+    (req, res) => {
         // console.log('succsee....');
         // console.log(req.user);
-        req.session.user = {
-            id: req.user.id,
-            username: req.user.displayName || req.user.username,
-            avatar: req.user._json.avatar_url,
-            provider: req.user.provider
+        req.session.user = {                    //请求登陆者信息
+            id: req.user.id,                    //id
+            username: req.user.displayName || req.user.username,    //id名
+            avatar: req.user._json.avatar_url,  //头像
+            provider: req.user.provider         //提供者
         };
-        res.redirect('/');
+        res.redirect('/');                      //重定向
 });
-router.get('/logout', function(req, res){
-    req.session.destroy();
-    res.redirect('/')
-});
+
 module.exports = router;
