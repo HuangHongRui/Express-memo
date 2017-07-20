@@ -29,6 +29,6 @@ function Toast(msg,time){                 //开关
   return new toast(msg, time);            //返回实例
 }
 
-window.Toast = Toast
+// window.Toast = Toast
 
 module.exports.Toast = Toast;

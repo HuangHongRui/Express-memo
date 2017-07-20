@@ -11,7 +11,7 @@ var index = require('./routes/index');          //路由
 var api = require('./routes/api');
 var auth = require('./routes/auth');
 var all = require('./routes/all');
-var app = express();
+var app = express();							//调用express得到app，可理解整个网站的逻辑就是这个app去处理的
 
 // 引擎设置
 app.set('views', path.join(__dirname, 'views'));//
@@ -31,9 +31,9 @@ app.use(passport.session());                     //认证
 // 	next()
 // });
 
-app.use('/', index);
-app.use('/auth', auth);
-app.use('/api', api);
+app.use('/', index);							 //当一个/开头请求过来，交由index处理
+app.use('/auth', auth);							 //以/auth开头的请求过来，交由auth处理
+app.use('/api', api);							 //
 
 app.use((req, res, next) => {
   var err = new Error('Not Found');

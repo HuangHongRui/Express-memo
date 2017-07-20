@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
       isLogin: false                        //否则登录状态false
     }
   }
-    res.render('index', loginData );        //渲染
+    res.render('index', loginData );        //发送页面，数据加模板组装起来渲染发送到页面上 
 
 });
 module.exports = router;                    //出口
