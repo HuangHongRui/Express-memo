@@ -5,7 +5,7 @@ var router = express.Router();                //新对象
 router.get('/', function(req, res, next) {
   var loginData;                            //登录变量
   if (req.session.user) {                   //如果有登陆者
-    var loginData = {
+    loginData = {
       isLogin: true,                        //登录状态true
       user: {
         avatar: req.session.user.avatar,    //显示头像

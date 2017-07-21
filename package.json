@@ -8,27 +8,31 @@
     "watch": "onchange 'src/**/*.js' 'src/**/*.less' -- npm run webpack"
   },
   "dependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
     "css-loader": "^0.28.4",
     "debug": "~2.6.3",
     "ejs": "~2.5.6",
     "express": "~4.15.2",
+    "extract-text-webpack-plugin": "^3.0.0",
     "less-loader": "^4.0.5",
     "sequelize": "^4.3.2",
     "serve-favicon": "^2.4.3",
     "sqlite3": "^3.1.8",
-    "style-loader": "^0.18.2"
+    "style-loader": "^0.18.2",
+    "webpack": "^3.2.0",
+    "webpack-notifier": "^1.5.0"
   },
   "devDependencies": {
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
+    "copy-webpack-plugin": "^4.0.1",
     "express-session": "^1.15.3",
     "less": "^2.7.2",
     "morgan": "^1.8.2",
     "onchange": "^3.2.1",
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
-    "passport-jirengu": "^1.0.1",
-    "resolve": "^1.3.3",
-    "webpack": "^3.2.0"
+    "resolve": "^1.3.3"
   }
 }

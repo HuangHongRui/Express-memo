@@ -604,7 +604,7 @@ function Toast(msg,time){                 //开关
   return new toast(msg, time);            //返回实例
 }
 
-window.Toast = Toast
+// window.Toast = Toast
 
 module.exports.Toast = Toast;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -704,10 +704,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Bree+Serif|Cabin:600|Chewy);", ""]);
 
 // module
-exports.push([module.i, "html,\nbody {\n  margin: 0;\n  height: 100%;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nbody {\n  font: 14px/1.4 'Arial';\n}\na {\n  text-decoration: none;\n  color: #fff;\n}\n#header {\n  height: 30px;\n  font-size: 12px;\n}\n#header a {\n  display: block;\n  font-size: 12px;\n  margin-top: 6px;\n}\n#header .user-area {\n  padding-right: 16px;\n  float: right;\n}\n#header .user-area li {\n  float: left;\n  margin-left: 5px;\n}\n#header .user-area li span {\n  color: #fff;\n  display: block;\n  margin-top: 6px;\n}\n#header .user-area img {\n  height: 18px;\n  margin-top: 5px;\n  border-radius: 50%;\n}\n#header .setting {\n  float: right;\n  margin-left: 9px;\n  display: none;\n}\n#header .add-note {\n  float: left;\n  margin-left: 16px;\n  border: 1px solid #fff;\n  border-radius: 4px;\n  padding: 2px 4px;\n}\n#header .login {\n  float: right;\n  margin-left: 16px;\n}\n#content {\n  position: relative;\n  height: -webkit-calc(70%);\n  height: calc(70%);\n}\n@keyframes move-twink-back {\n  from {\n    background-position: 0 0;\n  }\n  to {\n    background-position: -10000px 5000px;\n  }\n}\n.stars,\n.twinkling {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n.stars {\n  background: #000 url(http://7xpvnv.com2.z0.glb.qiniucdn.com/ba25c630-1c91-4ac1-a3de-65555d78c147.png) repeat top center;\n  z-index: -2;\n}\n.twinkling {\n  background: transparent url(http://7xpvnv.com2.z0.glb.qiniucdn.com/493b97e6-c499-4b41-a26b-8942873615b0.png) repeat top center;\n  z-index: -1;\n  animation: move-twink-back 200s linear infinite;\n}\n", ""]);
+exports.push([module.i, "html,\nbody {\n  margin: 0;\n  height: 100%;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nbody {\n  font: 18px/1.5 'Chewy', 'Cabin', 'Arial';\n  letter-spacing: 1px;\n}\na {\n  font-family: 'Bree Serif', serif;\n  text-decoration: none;\n  color: #fff;\n}\n#header {\n  top: 0;\n  font-size: 12px;\n  position: fixed;\n  max-height: 50px;\n  width: 100%;\n  z-index: 10;\n  display: flex;\n  opacity: 0.7;\n  align-items: center;\n  background-color: #ccc;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n#header:hover {\n  opacity: 0.5;\n}\n#header a {\n  display: block;\n  font-size: 15px;\n}\n#header .user-area {\n  margin: 0  30px;\n  padding-right: 16px;\n  display: flex;\n}\n#header .user-area li span {\n  color: #000;\n  font-size: 20px;\n  display: block;\n}\n#header .user-area li .logout {\n  line-height: 30px;\n}\n#header .user-area img {\n  height: 30px;\n  border-radius: 50%;\n}\n#header .add-note,\n#header .login {\n  border: 1px solid #fff;\n  border-radius: 4px;\n  padding: 2px 4px;\n  margin: 0  30px;\n}\n#content {\n  position: relative;\n  margin-top: 50px;\n  height: -webkit-calc(70%);\n  height: calc(70%);\n}\n.bgShow {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n.bgShow {\n  background: #000 url(https://images.pexels.com/photos/160483/hiker-traveler-trip-travel-160483.jpeg?w=1920&h=1280&auto=compress&cs=tinysrgb) repeat center center;\n  z-index: -10;\n  position: fixed;\n  background-size: cover;\n  background-attachment: scroll;\n}\n", ""]);
 
 // exports
 
@@ -910,7 +910,7 @@ exports.push([module.i, ".toast {\n  position: fixed;\n  left: 50%;\n  transform
 var Toast = __webpack_require__(4).Toast;  //请求提示
 var Event = __webpack_require__(3);      //请求事件
 
-function Note(opts){                      //事件开始
+function Note(opts){
   this.initOpts(opts);                    //调用函数方法
   this.createNote();                      //调用创建
   this.setStyle();                        //调用样式
@@ -929,7 +929,7 @@ Note.prototype = {                        //原型添加方法
   defaultOpts: {                          //默认啥——
     id: '',                               //Note的 id
     $ct: $('#content').length>0?$('#content'):$('body'),    //默认存放 Note 的容器
-    context: 'input here'                 //Note 的内容
+    context: '输入内容'                 //Note 的内容
   },
 
   initOpts: function (opts) {             //

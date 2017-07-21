@@ -16,7 +16,7 @@ router.get('/notes', (req, res, next) => {                  //来自notes的请�
 });
 
 router.post('/notes/add', (req, res, next) => {             //来自添加内容的请求
-  if (!!req.session || !req.session.user) {                 //无登陆者
+  if (!req.session || !req.session.user) {                 //无登陆者
     return res.send({status: 1, errorMsg: '请登录账号'})      //发送失败
   }
   var uid = req.session.user.id; //raise safety             //uid

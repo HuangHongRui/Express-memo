@@ -3,7 +3,7 @@ require('less/note.less');                //请求渲染
 var Toast = require('./toast.js').Toast;  //请求提示
 var Event = require('mod/event.js');      //请求事件
 
-function Note(opts){                      //事件开始
+function Note(opts){
   this.initOpts(opts);                    //调用函数方法
   this.createNote();                      //调用创建
   this.setStyle();                        //调用样式
@@ -22,7 +22,7 @@ Note.prototype = {                        //原型添加方法
   defaultOpts: {                          //默认啥——
     id: '',                               //Note的 id
     $ct: $('#content').length>0?$('#content'):$('body'),    //默认存放 Note 的容器
-    context: 'input here'                 //Note 的内容
+    context: '输入内容'                 //Note 的内容
   },
 
   initOpts: function (opts) {             //
