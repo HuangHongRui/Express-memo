@@ -618,6 +618,8 @@ module.exports.Toast = Toast;
 var NoteManager = __webpack_require__(11).NoteManager; //请求NoteManager | memo处理
 var Event = __webpack_require__(3);          //请求事件
 var WaterFall = __webpack_require__(17);  //请求瀑布
+var GoTop = __webpack_require__(18);
+var HideNav = __webpack_require__(19);
 
 NoteManager.load();                           //memo处理
 
@@ -628,6 +630,10 @@ $('.add-note').on('click', function() {       //点击按钮触发添加～
 Event.on('waterfall', function(){             //事件监控——  waterfall 触发
   WaterFall.init($('#content'));              //初始化
 });
+
+new GoTop();
+
+new HideNav($('#header'));
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
@@ -1162,6 +1168,103 @@ var WaterFall = (function(){        //瀑布
 
 module.exports = WaterFall
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {/**
+ * Created by huanghongrui on 17-7-21.
+ */
+
+
+function GoTop() {              //置顶
+    this.createNode();
+    this.bindEvent();
+}
+GoTop.prototype = {
+    createNode : function() {
+        this.target = $('<div class="goTop">T\nO\nP</div>');
+        this.target.css({
+            position: 'fixed',
+            top: '50%' ,
+            right: 0,
+            transform:'translateY(-50%)',
+            cursor: 'pointer',
+            height:'100px',
+            width: '5px',
+            'line-height': '33px',
+            padding: '10px',
+            'border-radius': '5px',
+            opacity: 0.5,
+            'background-color': 'rgba(255,255,0,0.6)',
+            'font-weight': 800,
+            // 'display': 'none'
+    });
+        $('body').append(this.target)
+    },
+    bindEvent : function() {
+        var _this = this;
+        $(window).on('scroll',function() {
+            var scrollTop = $(window).scrollTop();
+            if(scrollTop > 300){
+                _this.target.fadeIn(1000)
+            } else {
+                _this.target.fadeOut(500)
+            }
+        });
+        _this.target.click(function() {
+
+            $('html, body').animate({
+                scrollTop:0
+            }, 'slow')
+        })
+    }
+};
+module.exports = GoTop;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {/**
+ * Created by huanghongrui on 17-7-21.
+ */
+
+
+function HideNav(tagnode) {
+    this.tagnode = tagnode;
+    this.start();
+}
+
+HideNav.prototype = {
+    start : function(){
+        var _this = this;
+        var befor = 0;
+        var now = 1;
+        $(window).on('scroll', function() {
+            var scrollTop = $(window).scrollTop();
+                if (now > befor) {
+                    _this.tagnode.fadeOut(1000);
+                    befor = now;
+                    now = scrollTop;
+                    // console.log('b = '+ befor);
+                    // console.log('n = '+ now);
+                } else if (now <= befor){
+                    _this.tagnode.fadeIn(1000);
+                    befor = now;
+                    now = scrollTop;
+                    // console.log('-b = '+ befor);
+                    // console.log('-n = '+ now);
+                }
+        })
+    }
+};
+
+
+module.exports = HideNav;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ })
