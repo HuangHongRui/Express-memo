@@ -12,10 +12,7 @@ module.exports = {
     module: {
         rules: [{
             test: /\.less$/,
-            // use: ExtractTextPlugin.extract({
-            //         fallback: "style-loader",
-                    use: ["style-loader", "css-loader", "less-loader"]
-                // }) //把 css 抽离出来生成一个文件
+            use: ["style-loader", "css-loader", "less-loader"]
         }]
     },
     resolve: {
@@ -28,22 +25,6 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             $: "jquery"
-        }),
-        // new ExtractTextPlugin("css/index.css"),
-        // new webpack.LoaderOptionsPlugin({
-        //     options: {
-        //         postcss: [
-        //             autoprefixer(),
-        //         ]
-        //     }
-        // }),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false,
-        //     },
-        //     output: {
-        //         comments: false,
-        //     },
-        // }),
+        })
      ]
 };

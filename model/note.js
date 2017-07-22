@@ -19,7 +19,7 @@ var Note = sequelize.define('note', {
   }
 });
 
-Note.sync();                             //同步模型到数据库
+Note.sync();                             //同步模型到数据库 //{force: true}
 
 module.exports.Note = Note;              //出口
 

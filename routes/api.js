@@ -19,12 +19,29 @@ router.post('/notes/add', (req, res, next) => {             //来自添加内容
   if (!req.session || !req.session.user) {                 //无登陆者
     return res.send({status: 1, errorMsg: '请登录账号'})      //发送失败
   }
-  var uid = req.session.user.id; //raise safety             //uid
+  if (!req.body.note){
+    return res.send({status: 2, errorMsg: '抱歉,内容为空'})
+  }
+  var uid = req.session.user.id;                            //uid
   var note = req.body.note;                                 //内容
-  Note.create({text: note, uid: uid}).then(() => {          //创建{内容+uid}
-    res.send({status: 0})
+  var username = req.session.user.username;                 //用户名
+  var update = new Date().getTime();                        //更新时间
+  Note.create({
+     text: note,
+     uid: uid,
+     username: username,
+     createTime: update,
+     updateTime: update
+  }).then((data) => {
+    res.send({
+        status: 0,
+        result: data.get({plain: true})
+    })
   }).catch(() => {
-    res.send({status: 1, errorMsg: '抱歉.数据出错或无权限'})
+    res.send({
+        status: 1,
+        errorMsg: '抱歉.数据出错或无权限'
+    })
   });
 });
 
@@ -53,8 +70,9 @@ router.post('/notes/delete', (req, res, next) => {            //请求删除
     return res.send({status: 1, errorMsg: '请登录账号'})
   }
 
-  var uid = req.session.user.id,
-    noteId = req.body.id;
+  var uid = req.session.user.id;
+  var noteId = req.body.id;
+
   Note.destroy({where: {id: noteId, uid: uid}}).then((deleteLen) => {
     if (deleteLen === 0) {
       return res.send({status: 1, errorMsg: '无访问权限'})

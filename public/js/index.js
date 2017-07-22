@@ -828,7 +828,7 @@ var NoteManager = (function(){
   function load() {                           //生成
     $.get('/api/notes')                       //请求
       .done(function(ret){                    //获取数据
-        if(ret.status == 0){                  //成功
+        if(ret.status === 0){                 //成功
           $.each(ret.data, function(idx, article) {   //遍历数据，index|article
               new Note({                      //new|实例化 memo 
                 id: article.id,               //获取id
@@ -911,7 +911,8 @@ exports.push([module.i, ".toast {\n  position: fixed;\n  left: 50%;\n  transform
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(15);                //请求渲染
+/* WEBPACK VAR INJECTION */(function($) {
+__webpack_require__(15);                //请求渲染
 
 var Toast = __webpack_require__(4).Toast;  //请求提示
 var Event = __webpack_require__(3);      //请求事件
@@ -947,12 +948,16 @@ Note.prototype = {                        //原型添加方法
   },
 
   createNote: function () {               //创建元素
+      console.log(this.username)
+    var createTime = new Date().toLocaleDateString();
+    // var username = $('.username')[0].innerText;
+    cTime = createTime.replace(/\//g,"-");
     var tpl =  '<div class="note">'
-              + '<div class="note-head"><i class="icon">&#xe61f;</i><span class="delete">&times;</span></div>'
+              + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
+              + '<div class="note-foot">' + '<span class="username"></span><span class="time"></span></div>'
               +'</div>';
     this.$note = $(tpl);                  //元素
-    this.$note.find('.note-ct').html(this.opts.context);    //找到并插入内容
     this.opts.$ct.append(this.$note);                       //容器
     if(!this.id) {
       this.$note.attr('id','atarget');
@@ -1039,9 +1044,18 @@ Note.prototype = {                        //原型添加方法
 
     add: function (msg){                  //添加
     var self = this;
-    $.post('/api/notes/add', {note: msg}) //请求，数据内容为msg
+    $.post('/api/notes/add', {
+      note: msg
+    })                                    //请求，数据内容为msg
       .done(function(ret){                //数据到来
         if(ret.status === 0){
+             id =  ret.result.id;
+             context = ret.result.text;
+             update = new Date(parseInt(ret.result.updatedAt)).toLocaleString('chinese', { hour12: false });
+             username = ret.result.usernam;
+
+            self.$note.find('.time').html(update);
+            self.$note.find('.username').html(username);
           Toast('新增成功 | ADD SUCCESS');           //成功
         }else{
           self.$note.remove();            //移除元素
@@ -1111,7 +1125,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: 'iconfont';\n  /* project id 360873 */\n  src: url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.eot');\n  src: url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.woff') format('woff'), url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.ttf') format('truetype'), url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.svg#iconfont') format('svg');\n}\n.note {\n  position: absolute;\n  width: 230px;\n  text-align: center;\n  margin: 20px 10px;\n  transition: all 0.5s;\n}\n.note .note-head {\n  height: 30px;\n  cursor: move;\n}\n.note .note-head:hover .delete {\n  opacity: 1;\n}\n.note .note-ct {\n  padding: 10px;\n  background-color: #efb04e;\n  outline: none;\n}\n.note .delete {\n  position: absolute;\n  top: 4px;\n  right: 4px;\n  font-size: 12px;\n  color: #fff;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .3s;\n}\n.draggable {\n  opacity: 0.8;\n  cursor: move;\n  transition: none;\n}\n", ""]);
+exports.push([module.i, ".note {\n  position: absolute;\n  width: 230px;\n  text-align: center;\n  margin: 20px 10px;\n  transition: all 0.5s;\n}\n.note .note-head {\n  height: 30px;\n  border-radius: 20px 20px 0 0;\n  opacity: 0.9;\n}\n.note .note-head:hover .delete {\n  opacity: 1;\n  font-weight: 800;\n}\n.note .note-head:before {\n  content: ' ';\n  position: absolute;\n  top: 8px;\n  left: 50%;\n  transform: translateX(-50%);\n  cursor: move;\n  display: block;\n  width: 30px;\n  height: 15px;\n  background: #ffcccc;\n  border-radius: 10px;\n  border-left: 30px solid #ffeeaa;\n  opacity: 0.8;\n}\n.note .note-ct {\n  padding: 10px;\n  outline: none;\n}\n.note .note-foot {\n  background: #faf2cc;\n  border-radius: 0 0 10px 10px;\n  opacity: 0.8;\n}\n.note .delete {\n  position: absolute;\n  right: 15px;\n  font-size: 20px;\n  color: #fff;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .3s;\n}\n.draggable {\n  opacity: 0.8;\n  cursor: move;\n  transition: none;\n}\n", ""]);
 
 // exports
 

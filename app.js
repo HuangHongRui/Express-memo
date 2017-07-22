@@ -13,6 +13,8 @@ var auth = require('./routes/auth');
 var all = require('./routes/all');
 var app = express();							//调用express得到app，可理解整个网站的逻辑就是这个app去处理的
 
+
+
 // 引擎设置
 app.set('views', path.join(__dirname, 'views'));//
 app.set('view engine', 'ejs');

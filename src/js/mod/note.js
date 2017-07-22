@@ -1,3 +1,4 @@
+
 require('less/note.less');                //请求渲染
 
 var Toast = require('./toast.js').Toast;  //请求提示
@@ -34,12 +35,16 @@ Note.prototype = {                        //原型添加方法
   },
 
   createNote: function () {               //创建元素
+      console.log(this.username)
+    var createTime = new Date().toLocaleDateString();
+    // var username = $('.username')[0].innerText;
+    cTime = createTime.replace(/\//g,"-");
     var tpl =  '<div class="note">'
-              + '<div class="note-head"><i class="icon">&#xe61f;</i><span class="delete">&times;</span></div>'
+              + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
+              + '<div class="note-foot">' + '<span class="username"></span><span class="time"></span></div>'
               +'</div>';
     this.$note = $(tpl);                  //元素
-    this.$note.find('.note-ct').html(this.opts.context);    //找到并插入内容
     this.opts.$ct.append(this.$note);                       //容器
     if(!this.id) {
       this.$note.attr('id','atarget');
@@ -126,9 +131,18 @@ Note.prototype = {                        //原型添加方法
 
     add: function (msg){                  //添加
     var self = this;
-    $.post('/api/notes/add', {note: msg}) //请求，数据内容为msg
+    $.post('/api/notes/add', {
+      note: msg
+    })                                    //请求，数据内容为msg
       .done(function(ret){                //数据到来
         if(ret.status === 0){
+             id =  ret.result.id;
+             context = ret.result.text;
+             update = new Date(parseInt(ret.result.updatedAt)).toLocaleString('chinese', { hour12: false });
+             username = ret.result.usernam;
+
+            self.$note.find('.time').html(update);
+            self.$note.find('.username').html(username);
           Toast('新增成功 | ADD SUCCESS');           //成功
         }else{
           self.$note.remove();            //移除元素

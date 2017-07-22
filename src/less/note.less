@@ -1,14 +1,6 @@
-@font-face {
-  font-family: 'iconfont';  /* project id 360873 */
-  src: url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.eot');
-  src: url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.woff') format('woff'),
-  url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.svg#iconfont') format('svg');
-}
+
 .note{
   position: absolute;;
-  //color: #333;
   width: 230px;
   text-align: center;
   margin: 20px 10px;
@@ -16,62 +8,51 @@
 
   .note-head{
     height: 30px;
-    //background-color: #ea9b35;
-    cursor: move;
-
+    border-radius: 20px 20px 0 0;
+    opacity:0.9;
     &:hover .delete{
       opacity: 1;
+      font-weight: 800;
     }
 
-    //&:before{
-    //  position: absolute;
-    //  left: 50%;
-    //  top: -11px;
-    //  margin-left: -32px;
-    //  content: ' ';
-    //  display: block;
-    //  width: 30px;
-    //  height: 30px;
-    //  background: #35bba3;
-    //  border-radius: 30px;
-    //}
-    //
-    //&:after {
-    //  position: absolute;
-    //  left: 50%;
-    //  margin-left: 32px;
-    //  top: -11px;
-    //  z-index: -1;
-    //  content: '';
-    //  display: block;
-    //  width: 0;
-    //  height: 0;
-    //  border-left: 5px solid #299683;
-    //  border-top: 18px solid transparent;
-    //}
+    &:before{
+      content: ' ';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: move;
+      display: block;
+      width: 30px;
+      height: 15px;
+      background: #ffcccc;
+      border-radius: 10px;
+      border-left: 30px solid #ffeeaa;
+      opacity:0.8;
+    }
   }
 
-  .note-ct{
+  .note-ct {
     padding: 10px;
-    background-color: #efb04e;
     outline: none;
+  }
+
+  .note-foot {
+    background: #faf2cc;
+    border-radius: 0 0 10px 10px;
+    opacity: 0.8;
   }
 
   .delete {
     position: absolute;
-    top: 4px;
-    right: 4px;
-    font-size: 12px;
+    right: 15px;
+    font-size: 20px;
     color: #fff;
     cursor: pointer;
     opacity: 0;
     transition: opacity .3s;
   }
-
-
-
 }
-
 
 .draggable{
   opacity: 0.8;
