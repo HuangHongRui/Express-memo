@@ -625,7 +625,6 @@ NoteManager.load();                           //memo处理
 
 $('.add-note').on('click', function() {       //点击按钮触发添加～
   NoteManager.add();
-  // $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
 });
 
 Event.on('waterfall', function(){             //事件监控——  waterfall 触发
@@ -949,7 +948,7 @@ Note.prototype = {                        //原型添加方法
 
   createNote: function () {               //创建元素
     var tpl =  '<div class="note">'
-              + '<div class="note-head"><span class="delete">&times;</span></div>'
+              + '<div class="note-head"><i class="icon">&#xe61f;</i><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
               +'</div>';
     this.$note = $(tpl);                  //元素
@@ -1112,7 +1111,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 
 
 // module
-exports.push([module.i, ".note {\n  position: absolute;\n  color: #333;\n  width: 160px;\n  margin: 20px 10px;\n  transition: all 0.5s;\n}\n.note .note-head {\n  height: 20px;\n  background-color: #ea9b35;\n  cursor: move;\n}\n.note .note-head:hover .delete {\n  opacity: 1;\n}\n.note .note-head:before {\n  position: absolute;\n  left: 50%;\n  top: -11px;\n  margin-left: -32px;\n  content: ' ';\n  display: block;\n  width: 64px;\n  height: 18px;\n  background: #35bba3;\n}\n.note .note-head:after {\n  position: absolute;\n  left: 50%;\n  margin-left: 32px;\n  top: -11px;\n  z-index: -1;\n  content: '';\n  display: block;\n  width: 0;\n  height: 0;\n  border-left: 5px solid #299683;\n  border-top: 18px solid transparent;\n}\n.note .note-ct {\n  padding: 10px;\n  background-color: #efb04e;\n  outline: none;\n}\n.note .delete {\n  position: absolute;\n  top: 4px;\n  right: 4px;\n  font-size: 12px;\n  color: #fff;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .3s;\n}\n.draggable {\n  opacity: 0.8;\n  cursor: move;\n  transition: none;\n}\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: 'iconfont';\n  /* project id 360873 */\n  src: url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.eot');\n  src: url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.woff') format('woff'), url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.ttf') format('truetype'), url('//at.alicdn.com/t/font_xg6q4evgbvyj5rk9.svg#iconfont') format('svg');\n}\n.note {\n  position: absolute;\n  width: 230px;\n  text-align: center;\n  margin: 20px 10px;\n  transition: all 0.5s;\n}\n.note .note-head {\n  height: 30px;\n  cursor: move;\n}\n.note .note-head:hover .delete {\n  opacity: 1;\n}\n.note .note-ct {\n  padding: 10px;\n  background-color: #efb04e;\n  outline: none;\n}\n.note .delete {\n  position: absolute;\n  top: 4px;\n  right: 4px;\n  font-size: 12px;\n  color: #fff;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .3s;\n}\n.draggable {\n  opacity: 0.8;\n  cursor: move;\n  transition: none;\n}\n", ""]);
 
 // exports
 
@@ -1140,8 +1139,6 @@ var WaterFall = (function(){        //瀑布
 
     $items.each(function(){                           //遍历
       var $cur = $(this);                             //保存this
-
-      //colSumHeight = [100, 250, 80, 200]
 
       var idx = 0,                                    //基点
         minSumHeight = colSumHeight[0];               //最小的？ = 数组第一个元素

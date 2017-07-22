@@ -35,7 +35,7 @@ Note.prototype = {                        //原型添加方法
 
   createNote: function () {               //创建元素
     var tpl =  '<div class="note">'
-              + '<div class="note-head"><span class="delete">&times;</span></div>'
+              + '<div class="note-head"><i class="icon">&#xe61f;</i><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
               +'</div>';
     this.$note = $(tpl);                  //元素

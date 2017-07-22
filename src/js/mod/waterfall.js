@@ -18,8 +18,6 @@ var WaterFall = (function(){        //瀑布
     $items.each(function(){                           //遍历
       var $cur = $(this);                             //保存this
 
-      //colSumHeight = [100, 250, 80, 200]
-
       var idx = 0,                                    //基点
         minSumHeight = colSumHeight[0];               //最小的？ = 数组第一个元素
 

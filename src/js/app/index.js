@@ -10,7 +10,6 @@ NoteManager.load();                           //memo处理
 
 $('.add-note').on('click', function() {       //点击按钮触发添加～
   NoteManager.add();
-  // $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
 });
 
 Event.on('waterfall', function(){             //事件监控——  waterfall 触发
