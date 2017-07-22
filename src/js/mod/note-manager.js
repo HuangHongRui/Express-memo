@@ -7,9 +7,9 @@ var Event = require('mod/event.js');          //请求事件
 var NoteManager = (function(){
 
   function load() {                           //生成
-    $.get('/api/notes')                       //请求？
+    $.get('/api/notes')                       //请求
       .done(function(ret){                    //获取数据
-        if(ret.status == 0){                  //成功？
+        if(ret.status == 0){                  //成功
           $.each(ret.data, function(idx, article) {   //遍历数据，index|article
               new Note({                      //new|实例化 memo 
                 id: article.id,               //获取id

@@ -9,6 +9,7 @@ function Note(opts){
   this.setStyle();                        //调用样式
   this.bindEvent();                       //调用绑定事件
 }
+
 Note.prototype = {                        //原型添加方法
   colors: [                               //颜色
     ['#ea9b35','#efb04e'], // headColor, containerColor
@@ -40,7 +41,12 @@ Note.prototype = {                        //原型添加方法
     this.$note = $(tpl);                  //元素
     this.$note.find('.note-ct').html(this.opts.context);    //找到并插入内容
     this.opts.$ct.append(this.$note);                       //容器
-    if(!this.id)  this.$note.css('bottom', '10px');         //新增放到右边
+    if(!this.id) {
+      this.$note.attr('id','atarget');
+      Event.fire('waterfall');
+      $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
+      this.$note.removeAttr('id','atarget');
+    }
   },
 
   setStyle: function () {                                                 //样式
@@ -72,11 +78,12 @@ Note.prototype = {                        //原型添加方法
 
     //contenteditable没有 change 事件，所有这里做了模拟通过判断元素内容变动，执行 save
     $noteCt.on('focus', function() {                          //焦点于内容
-      if($noteCt.html()=='input here') $noteCt.html('');      //如果内容是...那么清空
+      if($noteCt.html()=='输入内容') $noteCt.html('');      //如果内容是...那么清空
       $noteCt.data('before', $noteCt.html());                 //描述: 在匹配元素上存储任意相关数据.
-    }).on('blur paste', function() {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
+    }).on('blur paste', function(e) {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
       if( $noteCt.data('before') != $noteCt.html() ) {        //如果元素内容 ！= X
         $noteCt.data('before',$noteCt.html());                //内容合并 X
+        $(e.target).parent().removeAttr('id','latecss')
         self.setLayout();                                     //调用函数————setLayout（）
         if(self.id){                                          //有id吗0,0？
           self.edit($noteCt.html())                           //有即编辑内容
@@ -118,7 +125,6 @@ Note.prototype = {                        //原型添加方法
   },
 
     add: function (msg){                  //添加
-    // console.log('addd...');               //
     var self = this;
     $.post('/api/notes/add', {note: msg}) //请求，数据内容为msg
       .done(function(ret){                //数据到来
@@ -130,7 +136,6 @@ Note.prototype = {                        //原型添加方法
           Toast(ret.errorMsg);            //提示
         }
       });
-    //todo
   },
 
   delete: function(){                           //Dle

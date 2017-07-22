@@ -625,6 +625,7 @@ NoteManager.load();                           //memo处理
 
 $('.add-note').on('click', function() {       //点击按钮触发添加～
   NoteManager.add();
+  // $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
 });
 
 Event.on('waterfall', function(){             //事件监控——  waterfall 触发
@@ -713,7 +714,7 @@ exports = module.exports = __webpack_require__(1)(undefined);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Bree+Serif|Cabin:600|Chewy);", ""]);
 
 // module
-exports.push([module.i, "html,\nbody {\n  margin: 0;\n  height: 100%;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nbody {\n  font: 18px/1.5 'Chewy', 'Cabin', 'Arial';\n  letter-spacing: 1px;\n  overflow-x: hidden;\n}\na {\n  font-family: 'Bree Serif', serif;\n  text-decoration: none;\n  color: #fff;\n}\n#header {\n  top: 0;\n  font-size: 12px;\n  position: fixed;\n  max-height: 50px;\n  width: 100%;\n  z-index: 10;\n  display: flex;\n  opacity: 0.7;\n  align-items: center;\n  background-color: #ccc;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n#header:hover {\n  opacity: 0.5;\n}\n#header a {\n  display: block;\n  font-size: 15px;\n}\n#header .user-area {\n  margin: 0  30px;\n  padding-right: 16px;\n  display: flex;\n}\n#header .user-area li span {\n  color: #000;\n  font-size: 20px;\n  display: block;\n  margin: 0 10px;\n}\n#header .user-area li .logout {\n  line-height: 30px;\n}\n#header .user-area img {\n  height: 30px;\n  border-radius: 50%;\n}\n#header .add-note,\n#header .login {\n  border: 1px solid #fff;\n  border-radius: 4px;\n  padding: 2px 4px;\n  margin: 0  30px;\n  z-index: 20;\n}\n#header .user-area .login:hover,\n#header .user-area .logout:hover,\n#header .add-note:hover {\n  color: #000;\n  font-weight: bold;\n}\n#content {\n  position: relative;\n  margin-top: 50px;\n  left: 28px;\n  height: -webkit-calc(70%);\n  height: calc(70%);\n}\n.bgShow {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n.bgShow {\n  background: #000 url(https://github.com/HuangHongRui/Express-memo/blob/master/src/img/1.jpeg?raw=true) repeat center center;\n  z-index: -10;\n  position: fixed;\n  background-size: cover;\n  background-attachment: scroll;\n}\n", ""]);
+exports.push([module.i, "html,\nbody {\n  margin: 0;\n  height: 100%;\n}\nul,\nli {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\nbody {\n  font: 18px/1.5 'Chewy', 'Cabin', 'Arial';\n  letter-spacing: 1px;\n  overflow-x: hidden;\n}\na {\n  font-family: 'Bree Serif', serif;\n  text-decoration: none;\n  color: #fff;\n}\n#header {\n  top: 0;\n  font-size: 12px;\n  position: fixed;\n  max-height: 50px;\n  width: 100%;\n  z-index: 10;\n  display: flex;\n  opacity: 0.7;\n  align-items: center;\n  background-color: #ccc;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  justify-content: space-between;\n}\n#header:hover {\n  opacity: 0.5;\n}\n#header a {\n  display: block;\n  font-size: 15px;\n}\n#header .user-area {\n  margin: 0  30px;\n  padding-right: 16px;\n  display: flex;\n}\n#header .user-area li span {\n  color: #000;\n  font-size: 20px;\n  display: block;\n  margin: 0 10px;\n}\n#header .user-area li .logout {\n  line-height: 30px;\n}\n#header .user-area img {\n  height: 30px;\n  border-radius: 50%;\n}\n#header .add-note,\n#header .login {\n  border: 1px solid #fff;\n  border-radius: 4px;\n  padding: 2px 4px;\n  margin: 0  30px;\n  z-index: 20;\n}\n#header .user-area .login:hover,\n#header .user-area .logout:hover,\n#header .add-note:hover {\n  color: #000;\n  font-weight: bold;\n}\n#content {\n  position: relative;\n  margin: 50px 30px 0 ;\n  height: -webkit-calc(70%);\n  height: calc(70%);\n}\n.bgShow {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  display: block;\n}\n.bgShow {\n  background: #000 url(https://github.com/HuangHongRui/Express-memo/blob/master/src/img/1.jpeg?raw=true) repeat center center;\n  z-index: -10;\n  position: fixed;\n  background-size: cover;\n  background-attachment: scroll;\n}\n", ""]);
 
 // exports
 
@@ -826,9 +827,9 @@ var Event = __webpack_require__(3);          //请求事件
 var NoteManager = (function(){
 
   function load() {                           //生成
-    $.get('/api/notes')                       //请求？
+    $.get('/api/notes')                       //请求
       .done(function(ret){                    //获取数据
-        if(ret.status == 0){                  //成功？
+        if(ret.status == 0){                  //成功
           $.each(ret.data, function(idx, article) {   //遍历数据，index|article
               new Note({                      //new|实例化 memo 
                 id: article.id,               //获取id
@@ -922,6 +923,7 @@ function Note(opts){
   this.setStyle();                        //调用样式
   this.bindEvent();                       //调用绑定事件
 }
+
 Note.prototype = {                        //原型添加方法
   colors: [                               //颜色
     ['#ea9b35','#efb04e'], // headColor, containerColor
@@ -953,7 +955,12 @@ Note.prototype = {                        //原型添加方法
     this.$note = $(tpl);                  //元素
     this.$note.find('.note-ct').html(this.opts.context);    //找到并插入内容
     this.opts.$ct.append(this.$note);                       //容器
-    if(!this.id)  this.$note.css('bottom', '10px');         //新增放到右边
+    if(!this.id) {
+      this.$note.attr('id','atarget');
+      Event.fire('waterfall');
+      $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
+      this.$note.removeAttr('id','atarget');
+    }
   },
 
   setStyle: function () {                                                 //样式
@@ -985,11 +992,12 @@ Note.prototype = {                        //原型添加方法
 
     //contenteditable没有 change 事件，所有这里做了模拟通过判断元素内容变动，执行 save
     $noteCt.on('focus', function() {                          //焦点于内容
-      if($noteCt.html()=='input here') $noteCt.html('');      //如果内容是...那么清空
+      if($noteCt.html()=='输入内容') $noteCt.html('');      //如果内容是...那么清空
       $noteCt.data('before', $noteCt.html());                 //描述: 在匹配元素上存储任意相关数据.
-    }).on('blur paste', function() {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
+    }).on('blur paste', function(e) {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
       if( $noteCt.data('before') != $noteCt.html() ) {        //如果元素内容 ！= X
         $noteCt.data('before',$noteCt.html());                //内容合并 X
+        $(e.target).parent().removeAttr('id','latecss')
         self.setLayout();                                     //调用函数————setLayout（）
         if(self.id){                                          //有id吗0,0？
           self.edit($noteCt.html())                           //有即编辑内容
@@ -1031,7 +1039,6 @@ Note.prototype = {                        //原型添加方法
   },
 
     add: function (msg){                  //添加
-    // console.log('addd...');               //
     var self = this;
     $.post('/api/notes/add', {note: msg}) //请求，数据内容为msg
       .done(function(ret){                //数据到来
@@ -1043,7 +1050,6 @@ Note.prototype = {                        //原型添加方法
           Toast(ret.errorMsg);            //提示
         }
       });
-    //todo
   },
 
   delete: function(){                           //Dle
