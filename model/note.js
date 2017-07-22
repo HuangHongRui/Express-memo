@@ -9,16 +9,25 @@ var sequelize = new Sequelize(undefined, undefined, undefined, {
 });                                      //数据库路径
 
 //模型
-var Note = sequelize.define('note', {
-
-  text: {
-    type: Sequelize.STRING               //内容？
-  },
-  uid: {
-    type: Sequelize.STRING               //每个登录用户uid
-  }
+const Note = sequelize.define('note', {
+    text: {
+        type: Sequelize.STRING
+    },
+    uid: {
+        type: Sequelize.INTEGER
+    },
+    username: {
+        type: Sequelize.STRING
+    },
+    createdAt: {
+        type: Sequelize.STRING
+    },
+    updatedAt: {
+        type: Sequelize.STRING
+    }
+}, {
+    timestamps: false
 });
-
 Note.sync();                             //同步模型到数据库 //{force: true}
 
 module.exports.Note = Note;              //出口

@@ -1,8 +1,8 @@
-
 require('less/note.less');                //请求渲染
 
 var Toast = require('./toast.js').Toast;  //请求提示
 var Event = require('mod/event.js');      //请求事件
+
 
 function Note(opts){
   this.initOpts(opts);                    //调用函数方法
@@ -11,40 +11,34 @@ function Note(opts){
   this.bindEvent();                       //调用绑定事件
 }
 
-Note.prototype = {                        //原型添加方法
-  colors: [                               //颜色
-    ['#ea9b35','#efb04e'], // headColor, containerColor
-    ['#dd598b','#e672a2'],
-    ['#eee34b','#f2eb67'],
-    ['#c24226','#d15a39'],
-    ['#c1c341','#d0d25c'],
-    ['#3f78c3','#5591d2']
-  ],
-
+Note.prototype = {
   defaultOpts: {                          //默认啥——
     id: '',                               //Note的 id
-    $ct: $('#content').length>0?$('#content'):$('body'),    //默认存放 Note 的容器
-    context: '输入内容'                 //Note 的内容
+    time: new Date().toLocaleString('chinese', { hour12: false }),
+    $ct: $('#content').length > 0 ? $('#content') : $('body'),    //默认存放 Note 的容器
+    context: '请输入内容...'                 //Note 的内容
   },
 
   initOpts: function (opts) {             //
-    this.opts = $.extend({}, this.defaultOpts, opts||{});   //extend描述: 将两个或更多对象的内容合并到第一个对象。
+    this.opts = $.extend({}, this.defaultOpts, opts || {});   //extend描述: 将两个或更多对象的内容合并到第一个对象。
     if(this.opts.id){                     //opts 的 id 获取
        this.id = this.opts.id;
     }
   },
 
   createNote: function () {               //创建元素
-      console.log(this.username)
-    var createTime = new Date().toLocaleDateString();
+    // var createTime = new Date().toLocaleDateString();
     // var username = $('.username')[0].innerText;
-    cTime = createTime.replace(/\//g,"-");
+    // cTime = createTime.replace(/\//g,"-");
     var tpl =  '<div class="note">'
               + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
-              + '<div class="note-foot">' + '<span class="username"></span><span class="time"></span></div>'
+              + '<div class="note-foot">' + '<span class="username"></span><span class="time"> Time </span></div>'
               +'</div>';
-    this.$note = $(tpl);                  //元素
+    this.$note = $(tpl);                                    //元素
+    this.$note.find('.time').html(this.opts.update);
+    this.$note.find('.username').html(this.opts.username);
+    this.$note.find('.note-ct').html(this.opts.context);
     this.opts.$ct.append(this.$note);                       //容器
     if(!this.id) {
       this.$note.attr('id','atarget');
@@ -52,12 +46,17 @@ Note.prototype = {                        //原型添加方法
       $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
       this.$note.removeAttr('id','atarget');
     }
+
+      Event.fire('waterfall');         //触发瀑布流事件
   },
 
-  setStyle: function () {                                                 //样式
-    var color = this.colors[Math.floor(Math.random()*6)];                 //颜色随机于color
-    this.$note.find('.note-head').css('background-color', color[0]);      //标题的背景色
-    this.$note.find('.note-ct').css('background-color', color[1]);        //内容的背景色
+  setStyle: function () {
+    var headcolors = ['#ea9b35', '#dd598b', '#eee34b', '#c24226', '#c1c341', '#3f78c3'];
+    var ctcolors = ['#efb04e', '#e672a2', '#f2eb67', '#d15a39', '#d0d25c', '#5591d2'];
+    var headcolor = headcolors[Math.floor(Math.random() * 6)];
+    var ctcolor = ctcolors[Math.floor(Math.random() * 6)];              //颜色随机于color
+    this.$note.find('.note-head').css('background-color', headcolor);      //标题的背景色
+    this.$note.find('.note-ct').css('background-color', ctcolor);        //内容的背景色
   },
 
   setLayout: function(){                      //设置布局
@@ -79,16 +78,15 @@ Note.prototype = {                        //原型添加方法
 
     $delete.on('click', function(){            //点击触发——删除
       self.delete();
-    })
+    });
 
     //contenteditable没有 change 事件，所有这里做了模拟通过判断元素内容变动，执行 save
     $noteCt.on('focus', function() {                          //焦点于内容
-      if($noteCt.html()=='输入内容') $noteCt.html('');      //如果内容是...那么清空
+      if($noteCt.html()=='请输入内容...') $noteCt.html('');      //如果内容是...那么清空
       $noteCt.data('before', $noteCt.html());                 //描述: 在匹配元素上存储任意相关数据.
     }).on('blur paste', function(e) {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
       if( $noteCt.data('before') != $noteCt.html() ) {        //如果元素内容 ！= X
         $noteCt.data('before',$noteCt.html());                //内容合并 X
-        $(e.target).parent().removeAttr('id','latecss')
         self.setLayout();                                     //调用函数————setLayout（）
         if(self.id){                                          //有id吗0,0？
           self.edit($noteCt.html())                           //有即编辑内容
@@ -136,17 +134,19 @@ Note.prototype = {                        //原型添加方法
     })                                    //请求，数据内容为msg
       .done(function(ret){                //数据到来
         if(ret.status === 0){
-             id =  ret.result.id;
-             context = ret.result.text;
-             update = new Date(parseInt(ret.result.updatedAt)).toLocaleString('chinese', { hour12: false });
-             username = ret.result.usernam;
 
-            self.$note.find('.time').html(update);
-            self.$note.find('.username').html(username);
+            self.$note.remove();
+            new Note({
+                id: ret.result.id,
+                context: ret.result.text,
+                update: new Date(parseInt(ret.result.updatedAt)).toLocaleString('chinese', { hour12: false }),
+                username: ret.result.username
+            });
+
           Toast('新增成功 | ADD SUCCESS');           //成功
         }else{
           self.$note.remove();            //移除元素
-          Event.fire('waterfall');         //触发瀑布流事件
+          // Event.fire('waterfall');         //触发瀑布流事件
           Toast(ret.errorMsg);            //提示
         }
       });
@@ -166,7 +166,6 @@ Note.prototype = {                        //原型添加方法
     });
 
   }
-
 };
 
 module.exports.Note = Note;                     //模块入口

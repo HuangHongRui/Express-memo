@@ -9,6 +9,7 @@ var GitHubStrategy = require('passport-github').Strategy;   //github战略-。-
 
 passport.serializeUser((user, done) => {
     console.log('---serializeUser---');
+    console.log(user)
     done(null, user);
 });
 
@@ -38,8 +39,6 @@ router.get('/github',
 router.get('/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
-        console.log('succsee....');
-        console.log(req.user);
         req.session.user = {                    //请求登陆者信息
             id: req.user.id,                    //id
             username: req.user.displayName || req.user.username,    //id名
