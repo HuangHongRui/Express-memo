@@ -936,7 +936,7 @@ Note.prototype = {
       var tpl = '<div class="note">'
               + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
-              + '<div class="note-foot"><span class="username"></span><span class="time">'
+              + '<div class="note-foot"><span class="username"></span><br/><span class="time">'
               + new Date().toLocaleString('chinese', { hour12: false }) + '</span></div>'
               +'</div>';
       this.$note = $(tpl);

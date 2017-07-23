@@ -20,7 +20,7 @@ router.get('/notes', (req, res, next) => {
 
 router.post('/notes/add', (req, res, next) => {
     if (!req.session || !req.session.user) {                 //无登陆者
-        return res.send({status: 1, errorMsg: '请登录账号'})      //发送失败
+        return res.send({status: 1, errorMsg: '请登录账号 | Please Login'})      //发送失败
     }
     if (!req.body.note){
         return res.send({status: 2, errorMsg: '抱歉,内容不可为空'})
@@ -53,7 +53,7 @@ router.post('/notes/edit', (req, res, next) => {             //更改
     if (!req.session || !req.session.user) {                   //验证是否登录
         return res.send({
             status: 1,
-            errorMsg: '请登录账号'
+            errorMsg: '请登录账号 | Please Login'
         })
     }
 
@@ -79,7 +79,7 @@ router.post('/notes/edit', (req, res, next) => {             //更改
 
 router.post('/notes/delete', (req, res, next) => {            //请求删除
     if (!req.session || !req.session.user) {
-        return res.send({ status: 1, errorMsg: '请登录账号' })
+        return res.send({ status: 1, errorMsg: '请登录账号 | Please Login' })
     }
 
     var noteId = req.body.id;
