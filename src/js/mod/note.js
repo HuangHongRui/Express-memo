@@ -10,7 +10,6 @@ function Note(opts){
 Note.prototype = {
 
     initOpts: function (opts) {
-      var self = this;
         this.defaultOpts = {
         id: '',
         time: new Date().toLocaleString('chinese', { hour12: false }),
@@ -26,28 +25,27 @@ Note.prototype = {
       var tpl = '<div class="note">'
               + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
-              + '<div class="note-foot"><span class="username"></span><br/><span class="time">'
+              + '<div class="note-foot"><span class="username">Dear</span><br/><span class="time">'
               + new Date().toLocaleString('chinese', { hour12: false }) + '</span></div>'
               +'</div>';
       this.$note = $(tpl);
       this.$note.find('.time').html(this.opts.update);
       this.$note.find('.username').html(this.opts.username);
+      console.log(this.opts.username)
       this.$note.find('.note-ct').html(this.opts.context);
       this.opts.$ct.append(this.$note);
       if(!this.id) {
         this.$note.siblings().removeAttr('id','atarget');
         this.$note.attr('id','atarget').css({ top: '-30px' });
-
         findTarget();
       }
-        Event.fire('waterfall');
         this.setStyle();
+        Event.fire('waterfall');
         function findTarget() {
           var targetTop,
               windowTop = ($(window).scrollTop()) + $(window).height();
             setTimeout(()=>{
               targetTop = $('#atarget').offset().top;
-              console.log(targetTop + '|' + windowTop);
               if (windowTop < targetTop){
                 $("html,body").animate({scrollTop: targetTop}, 1000);
               }

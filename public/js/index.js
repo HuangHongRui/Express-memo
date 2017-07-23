@@ -920,7 +920,6 @@ function Note(opts){
 Note.prototype = {
 
     initOpts: function (opts) {
-      var self = this;
         this.defaultOpts = {
         id: '',
         time: new Date().toLocaleString('chinese', { hour12: false }),
@@ -936,28 +935,27 @@ Note.prototype = {
       var tpl = '<div class="note">'
               + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
-              + '<div class="note-foot"><span class="username"></span><br/><span class="time">'
+              + '<div class="note-foot"><span class="username">Dear</span><br/><span class="time">'
               + new Date().toLocaleString('chinese', { hour12: false }) + '</span></div>'
               +'</div>';
       this.$note = $(tpl);
       this.$note.find('.time').html(this.opts.update);
       this.$note.find('.username').html(this.opts.username);
+      console.log(this.opts.username)
       this.$note.find('.note-ct').html(this.opts.context);
       this.opts.$ct.append(this.$note);
       if(!this.id) {
         this.$note.siblings().removeAttr('id','atarget');
         this.$note.attr('id','atarget').css({ top: '-30px' });
-
         findTarget();
       }
-        Event.fire('waterfall');
         this.setStyle();
+        Event.fire('waterfall');
         function findTarget() {
           var targetTop,
               windowTop = ($(window).scrollTop()) + $(window).height();
             setTimeout(()=>{
               targetTop = $('#atarget').offset().top;
-              console.log(targetTop + '|' + windowTop);
               if (windowTop < targetTop){
                 $("html,body").animate({scrollTop: targetTop}, 1000);
               }
@@ -1130,10 +1128,10 @@ if(false) {
 
 exports = module.exports = __webpack_require__(1)(undefined);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Crete+Round|Hind:600|Varela+Round);", ""]);
 
 // module
-exports.push([module.i, ".note {\n  position: absolute;\n  width: 230px;\n  text-align: center;\n  margin: 20px 10px;\n  transition: all 0.5s;\n}\n.note .note-head {\n  height: 30px;\n  border-radius: 20px 20px 0 0;\n  opacity: 0.9;\n}\n.note .note-head:hover .delete {\n  opacity: 1;\n  font-weight: 800;\n}\n.note .note-head:before {\n  content: ' ';\n  position: absolute;\n  top: 8px;\n  left: 50%;\n  transform: translateX(-50%);\n  cursor: move;\n  display: block;\n  width: 30px;\n  height: 15px;\n  background: #ffcccc;\n  border-radius: 10px;\n  border-left: 30px solid #ffeeaa;\n  opacity: 0.8;\n}\n.note .note-ct {\n  padding: 10px;\n  outline: none;\n}\n.note .note-foot {\n  background: #faf2cc;\n  border-radius: 0 0 10px 10px;\n  opacity: 0.8;\n}\n.note .delete {\n  position: absolute;\n  right: 15px;\n  font-size: 20px;\n  color: #fff;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .3s;\n}\n.draggable {\n  opacity: 0.8;\n  cursor: move;\n  transition: none;\n}\n", ""]);
+exports.push([module.i, ".note {\n  position: absolute;\n  width: 230px;\n  text-align: center;\n  margin: 20px 10px;\n  transition: all 0.5s;\n}\n.note:hover {\n  box-shadow: 1px 30px 30px 2px rgba(0, 0, 0, 0.3);\n}\n.note .note-head {\n  height: 30px;\n  border-radius: 20px 20px 0 0;\n  opacity: 0.9;\n}\n.note .note-head:hover .delete {\n  opacity: 1;\n  font-weight: 800;\n}\n.note .note-head:before {\n  content: ' ';\n  position: absolute;\n  top: 8px;\n  left: 50%;\n  transform: translateX(-50%);\n  cursor: move;\n  display: block;\n  width: 30px;\n  height: 15px;\n  background: #ffcccc;\n  border-radius: 10px;\n  border-left: 30px solid #ffeeaa;\n  opacity: 0.8;\n}\n.note .note-ct {\n  padding: 15px 10px;\n  outline: none;\n}\n.note .note-foot {\n  background: #faf2cc;\n  border-radius: 0 0 10px 10px;\n  opacity: 0.7;\n  color: #708090;\n}\n.note .note-foot .username {\n  font-family: 'Crete Round', 'Varela Round', 'Hind', serif;\n}\n.note .note-foot .time {\n  font-family: 'Crete Round', 'Varela Round', 'Hind', serif;\n}\n.note .delete {\n  position: absolute;\n  right: 15px;\n  font-size: 20px;\n  color: #fff;\n  cursor: pointer;\n  opacity: 0;\n  transition: opacity .3s;\n}\n.draggable {\n  opacity: 0.8;\n  cursor: move;\n  transition: none;\n}\n", ""]);
 
 // exports
 

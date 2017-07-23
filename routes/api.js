@@ -34,8 +34,8 @@ router.post('/notes/add', (req, res, next) => {
         text: note,
         uid: uid,
         username: username,
-        createTime: update,
-        updateTime: update
+        createdAt: update,
+        updatedAt: update
     }).then((data) => {
         res.send({
             status: 0,
