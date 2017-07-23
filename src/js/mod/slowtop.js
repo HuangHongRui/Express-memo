@@ -17,14 +17,16 @@ GoTop.prototype = {
             transform:'translateY(-50%)',
             cursor: 'pointer',
             height:'100px',
-            width: '5px',
+            width: '4px',
             'line-height': '33px',
             padding: '10px',
-            'border-radius': '5px',
+            'border-radius': '5px 0 0 5px',
             opacity: 0.5,
-            'background-color': 'rgba(255,255,0,0.6)',
+            border: 'solid 2px #000',
+            'border-right': 'none',
+            'background-color': 'rgba(200,200,200,0.6)',
             'font-weight': 800,
-            // 'display': 'none'
+            'display': 'none'
     });
         $('body').append(this.target)
     },
@@ -32,7 +34,7 @@ GoTop.prototype = {
         var _this = this;
         $(window).on('scroll',function() {
             var scrollTop = $(window).scrollTop();
-            if(scrollTop > 300){
+            if(scrollTop >= 50){
                 _this.target.fadeIn(1000)
             } else {
                 _this.target.fadeOut(500)

@@ -3,20 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="779214e0-7570-4614-afba-7516434870b0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/database.sqlite" afterPath="$PROJECT_DIR$/database/database.sqlite" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/note.js" afterPath="$PROJECT_DIR$/model/note.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/index.js" afterPath="$PROJECT_DIR$/public/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/all.js" afterPath="$PROJECT_DIR$/routes/all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/api.js" afterPath="$PROJECT_DIR$/routes/api.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/auth.js" afterPath="$PROJECT_DIR$/routes/auth.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/app/index.js" afterPath="$PROJECT_DIR$/src/js/app/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/event.js" afterPath="$PROJECT_DIR$/src/js/mod/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/hideNav.js" afterPath="$PROJECT_DIR$/src/js/mod/hideNav.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/note-manager.js" afterPath="$PROJECT_DIR$/src/js/mod/note-manager.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/note.js" afterPath="$PROJECT_DIR$/src/js/mod/note.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/toast.js" afterPath="$PROJECT_DIR$/src/js/mod/toast.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/waterfall.js" afterPath="$PROJECT_DIR$/src/js/mod/waterfall.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/mod/slowtop.js" afterPath="$PROJECT_DIR$/src/js/mod/slowtop.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,10 +23,10 @@
       <file leaf-file-name="note.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/mod/note.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="47" column="37" lean-forward="false" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+            <state relative-caret-position="393">
+              <caret line="52" column="15" lean-forward="true" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
               <folding>
-                <marker date="1500811076848" expanded="true" signature="1036:1043" ph="×" />
+                <marker date="1500825147175" expanded="true" signature="694:701" ph="×" />
               </folding>
             </state>
           </provider>
@@ -72,6 +62,7 @@
         <option value="$PROJECT_DIR$/routes/api.js" />
         <option value="$PROJECT_DIR$/model/note.js" />
         <option value="$PROJECT_DIR$/src/less/index.less" />
+        <option value="$PROJECT_DIR$/src/js/mod/slowtop.js" />
         <option value="$PROJECT_DIR$/src/js/mod/note.js" />
       </list>
     </option>
@@ -94,11 +85,11 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="664" />
-    <option name="y" value="24" />
-    <option name="width" value="702" />
-    <option name="height" value="744" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="33" />
+    <option name="y" value="-4" />
+    <option name="width" value="1333" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -116,6 +107,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -155,7 +147,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -186,27 +177,28 @@
       <option name="presentableId" value="Default" />
       <updated>1500791624549</updated>
       <workItem from="1500791625840" duration="9744000" />
-      <workItem from="1500805607163" duration="4755000" />
+      <workItem from="1500805607163" duration="6918000" />
+      <workItem from="1500820139219" duration="5035000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14499000" />
+    <option name="totallyTimeSpent" value="21697000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="664" y="24" width="702" height="744" extended-state="4" />
+    <frame x="33" y="-4" width="1333" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0071225073" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17329332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -232,7 +224,17 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1500811076848" expanded="true" signature="1036:1043" ph="×" />
+            <marker date="1500825147175" expanded="true" signature="694:701" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/mod/note.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1500825147175" expanded="true" signature="694:701" ph="×" />
           </folding>
         </state>
       </provider>
@@ -255,7 +257,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
           <caret line="33" column="15" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -312,7 +313,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -335,7 +335,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
           <caret line="105" column="2" lean-forward="false" selection-start-line="105" selection-start-column="2" selection-end-line="105" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -347,12 +346,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/mod/slowtop.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="25" column="33" lean-forward="false" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/mod/note.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="47" column="37" lean-forward="false" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+        <state relative-caret-position="393">
+          <caret line="52" column="15" lean-forward="true" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
           <folding>
-            <marker date="1500811076848" expanded="true" signature="1036:1043" ph="×" />
+            <marker date="1500825147175" expanded="true" signature="694:701" ph="×" />
           </folding>
         </state>
       </provider>
