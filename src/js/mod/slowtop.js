@@ -6,6 +6,7 @@
 function GoTop() {              //置顶
     this.createNode();
     this.bindEvent();
+    this.hoverShow();
 }
 GoTop.prototype = {
     createNode : function() {
@@ -45,6 +46,16 @@ GoTop.prototype = {
             $('html, body').animate({
                 scrollTop:0
             }, 'slow')
+        })
+    },
+
+    hoverShow : function() {
+        this.target.mouseenter(()=>{
+            $('#header').fadeIn(500);
+        }).mouseleave(() => {
+            setTimeout(()=>{
+                $('#header').fadeOut(500);
+            },5000)
         })
     }
 };

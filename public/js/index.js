@@ -618,14 +618,14 @@ var WaterFall = __webpack_require__(17);
 var GoTop = __webpack_require__(18);
 var HideNav = __webpack_require__(19);
 
-NoteManager.load();                           //memo处理
+NoteManager.load();
 
-$('.add-note').on('click', function() {       //点击按钮触发添加～
+$('.add-note').on('click', function() {
     NoteManager.add();
 });
 
-Event.on('waterfall', function(){             //事件监控——  waterfall 触发
-    WaterFall.init($('#content'));              //初始化
+Event.on('waterfall', function(){
+    WaterFall.init($('#content'));
 });
 
 new GoTop();
@@ -956,7 +956,7 @@ Note.prototype = {
               windowTop = ($(window).scrollTop()) + $(window).height();
             setTimeout(()=>{
               targetTop = $('#atarget').offset().top;
-              if (windowTop < targetTop){
+              if (windowTop < targetTop + 100){
                 $("html,body").animate({scrollTop: targetTop}, 1000);
               }
             },500);
@@ -1202,6 +1202,7 @@ module.exports = WaterFall
 function GoTop() {              //置顶
     this.createNode();
     this.bindEvent();
+    this.hoverShow();
 }
 GoTop.prototype = {
     createNode : function() {
@@ -1242,6 +1243,16 @@ GoTop.prototype = {
                 scrollTop:0
             }, 'slow')
         })
+    },
+
+    hoverShow : function() {
+        this.target.mouseenter(()=>{
+            $('#header').fadeIn(500);
+        }).mouseleave(() => {
+            setTimeout(()=>{
+                $('#header').fadeOut(500);
+            },5000)
+        })
     }
 };
 module.exports = GoTop;
@@ -1270,6 +1281,7 @@ HideNav.prototype = {
             var scrollTop = $(window).scrollTop();
                 if (now > befor) {
                     _this.tagnode.fadeOut(500);
+                    var clock = true;
                     befor = now;
                     now = scrollTop;
                     // console.log('b = '+ befor);

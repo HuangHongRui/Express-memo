@@ -46,7 +46,7 @@ Note.prototype = {
               windowTop = ($(window).scrollTop()) + $(window).height();
             setTimeout(()=>{
               targetTop = $('#atarget').offset().top;
-              if (windowTop < targetTop){
+              if (windowTop < targetTop + 100){
                 $("html,body").animate({scrollTop: targetTop}, 1000);
               }
             },500);

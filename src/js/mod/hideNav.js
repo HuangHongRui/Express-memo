@@ -17,6 +17,7 @@ HideNav.prototype = {
             var scrollTop = $(window).scrollTop();
                 if (now > befor) {
                     _this.tagnode.fadeOut(500);
+                    var clock = true;
                     befor = now;
                     now = scrollTop;
                     // console.log('b = '+ befor);
