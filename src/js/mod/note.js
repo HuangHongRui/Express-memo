@@ -54,8 +54,8 @@ Note.prototype = {
     },
 
   setStyle: function () {
-    var headcolors = ['#ea9b35', '#dd598b', '#eee34b', '#c24226', '#c1c341', '#3f78c3'];
-    var ctcolors = ['#efb04e', '#e672a2', '#f2eb67', '#d15a39', '#d0d25c', '#5591d2'];
+    var headcolors = ['#A0522D','#5F9EA0','#2E8B57','#DEB887','#708090','#d15a39'];
+    var ctcolors = ['#98FB98','#5F9EA0','#FFB6C1','#eee34b','#EE82EE','#ea9b35'];
     var headcolor = headcolors[Math.floor(Math.random() * 6)];
     var ctcolor = ctcolors[Math.floor(Math.random() * 6)];              //颜色随机于color
     this.$note.find('.note-head').css('background-color', headcolor);      //标题的背景色
