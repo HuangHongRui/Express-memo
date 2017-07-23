@@ -31,4 +31,4 @@ function Toast(msg,time){                 //开关
 
 // window.Toast = Toast
 
-module.exports.Toast = Toast;
+module.exports = Toast;

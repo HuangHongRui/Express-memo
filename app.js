@@ -1,3 +1,5 @@
+
+
 var express = require('express');               //请求express
 var path = require('path');                     //请求path
 // var favicon = require('serve-favicon');         //服务图标中间件
@@ -32,20 +34,20 @@ app.use('/api', api);							 //接口
 app.use('/all', all);                            //全部便签
 
 app.use((req, res, next) => {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // 错误处理
 app.use((err, req, res, next) => {
-  //提示本地开发错误
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    //提示本地开发错误
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // 渲染错误页面
-  res.status(err.status || 500);
-  res.render('error');
+    // 渲染错误页面
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

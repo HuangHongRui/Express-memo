@@ -522,27 +522,23 @@ function updateLink (link, options, obj) {
 /* 3 */
 /***/ (function(module, exports) {
 
-
-  var EventCenter = (function(){        //立即执行
-
-    var events = {};                    //空对象
+  var EventCenter = (function(){
+    var events = {};
 
     function on(evt, handler){          
-      events[evt] = events[evt] || [];  //保存
-
+      events[evt] = events[evt] || [];
       events[evt].push({
         handler: handler
       });
     }
 
-    function fire(evt, args){           //开火-。-执行
+    function fire(evt, args){
       if(!events[evt]){                 
         return;
       }
-      for(var i=0; i<events[evt].length; i++){
+      for(var i = 0; i < events[evt].length; i++){
         events[evt][i].handler(args);
       }
-      
     }
 
     return {
@@ -606,29 +602,30 @@ function Toast(msg,time){                 //开关
 
 // window.Toast = Toast
 
-module.exports.Toast = Toast;
+module.exports = Toast;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(8);       // 请求渲染css
+/* WEBPACK VAR INJECTION */(function($) {
+__webpack_require__(8);
 
-var NoteManager = __webpack_require__(11).NoteManager; //请求NoteManager | memo处理
-var Event = __webpack_require__(3);          //请求事件
-var WaterFall = __webpack_require__(17);  //请求瀑布
+var NoteManager = __webpack_require__(11);
+var Event = __webpack_require__(3);
+var WaterFall = __webpack_require__(17);
 var GoTop = __webpack_require__(18);
 var HideNav = __webpack_require__(19);
 
 NoteManager.load();                           //memo处理
 
 $('.add-note').on('click', function() {       //点击按钮触发添加～
-  NoteManager.add();
+    NoteManager.add();
 });
 
 Event.on('waterfall', function(){             //事件监控——  waterfall 触发
-  WaterFall.init($('#content'));              //初始化
+    WaterFall.init($('#content'));              //初始化
 });
 
 new GoTop();
@@ -817,50 +814,49 @@ module.exports = function (css) {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {var Toast = __webpack_require__(4).Toast;      //请求提示
-var Note = __webpack_require__(14).Note;         //请求memo
+/* WEBPACK VAR INJECTION */(function($) {var Toast = __webpack_require__(4);      //请求提示
+var Note = __webpack_require__(14);         //请求memo
 var Event = __webpack_require__(3);          //请求事件
 
 var NoteManager = (function(){
 
-  function load() {                           //生成
-    $.get('/api/notes')                       //请求
-      .done(function(ret){                    //获取数据
-        if(ret.status === 0){                 //成功
-            if (ret.data) {
-                $.each(ret.data, function (idx, article) {   //遍历数据，index|article
-                    new Note({                      //new|实例化 memo
-                        id: article.id,
-                        context: article.text,
-                        update: new Date(parseInt(article.updatedAt)).toLocaleString('chinese', {hour12: false}),
-                        username: article.username
-                    });
-                });
-                Event.fire('waterfall');            //触发瀑布
-            }
-        }else{
-          Toast(ret.errorMsg);                //提示
-        }
-      })
-      .fail(function(){                   
-        Toast('网络出现异常');                     //提示
-      });
+    function load() {                           //生成
+        $.get('/api/notes')                       //请求
+            .done(function(ret){                    //获取数据
+                if(ret.status === 0){                 //成功
+                    if (ret.data) {
+                        $.each(ret.data, function (idx, article) {   //遍历数据，index|article
+                            new Note({                      //new|实例化 memo
+                                id: article.id,
+                                context: article.text,
+                                update: new Date(parseInt(article.updatedAt)).toLocaleString('chinese', {hour12: false}),
+                                username: article.username
+                            });
+                        });
+                        Event.fire('waterfall');            //触发瀑布
+                    }
+                }else{
+                    Toast(ret.errorMsg);                //提示
+                }
+            }).fail(function(){
+            Toast('网络出现异常');                     //提示
+        });
 
 
-  }
+    }
 
-  function add(){                             //添加——实例note
-    new Note();
-  }
+    function add(){                             //添加——实例note
+        new Note();
+    }
 
-  return {
-    load: load,                               //返回 load
-    add: add                                  //返回 添加
-  }
+    return {
+        load: load,                               //返回 load
+        add: add                                  //返回 添加
+    }
 
 })();
 
-module.exports.NoteManager = NoteManager;
+module.exports = NoteManager;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
@@ -912,57 +908,60 @@ exports.push([module.i, ".toast {\n  position: fixed;\n  left: 50%;\n  transform
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(15);                //请求渲染
-
-var Toast = __webpack_require__(4).Toast;  //请求提示
-var Event = __webpack_require__(3);      //请求事件
+/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(15);
+var Toast = __webpack_require__(4);
+var Event = __webpack_require__(3);
 
 
 function Note(opts){
   this.initOpts(opts);                    //调用函数方法
-  this.createNote();                      //调用创建
+  // this.createNote();                      //调用创建
   this.setStyle();                        //调用样式
   this.bindEvent();                       //调用绑定事件
 }
 
 Note.prototype = {
-  defaultOpts: {                          //默认啥——
-    id: '',                               //Note的 id
-    time: new Date().toLocaleString('chinese', { hour12: false }),
-    $ct: $('#content').length > 0 ? $('#content') : $('body'),    //默认存放 Note 的容器
-    context: '请输入内容...'                 //Note 的内容
-  },
 
-  initOpts: function (opts) {             //
-    this.opts = $.extend({}, this.defaultOpts, opts || {});   //extend描述: 将两个或更多对象的内容合并到第一个对象。
-    if(this.opts.id){                     //opts 的 id 获取
-       this.id = this.opts.id;
-    }
-  },
+    initOpts: function (opts) {
+      var self = this;
+      this.defaultOpts = {                          //默认啥——
+        id: '',                               //Note的 id
+        time: new Date().toLocaleString('chinese', { hour12: false }),
+        $ct: $('#content').length > 0 ? $('#content') : $('body'),    //默认存放 Note 的容器
+        context: '请输入内容...'                 //Note 的内容
+      };
 
-  createNote: function () {               //创建元素
-    // var createTime = new Date().toLocaleDateString();
-    // var username = $('.username')[0].innerText;
-    // cTime = createTime.replace(/\//g,"-");
-    var tpl =  '<div class="note">'
+      this.opts = $.extend({}, this.defaultOpts, opts || {});   //extend描述: 将两个或更多对象的内容合并到第一个对象。
+      if(this.opts.id){                     //opts 的 id 获取
+         this.id = this.opts.id;
+      }
+
+      var tpl = '<div class="note">'
               + '<div class="note-head"><span class="delete">&times;</span></div>'
               + '<div class="note-ct" contenteditable="true"></div>'
-              + '<div class="note-foot">' + '<span class="username"></span><span class="time"> Time </span></div>'
+              + '<div class="note-foot"><span class="username"></span><span class="time">'
+              + new Date().toLocaleString('chinese', { hour12: false }) + '</span></div>'
               +'</div>';
-    this.$note = $(tpl);                                    //元素
-    this.$note.find('.time').html(this.opts.update);
-    this.$note.find('.username').html(this.opts.username);
-    this.$note.find('.note-ct').html(this.opts.context);
-    this.opts.$ct.append(this.$note);                       //容器
-    if(!this.id) {
-      this.$note.attr('id','atarget');
-      Event.fire('waterfall');
-      $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
-      this.$note.removeAttr('id','atarget');
-    }
+      this.$note = $(tpl);                                    //元素
+      this.$note.find('.time').html(this.opts.update);
+      this.$note.find('.username').html(this.opts.username);
+      this.$note.find('.note-ct').html(this.opts.context);
+      this.opts.$ct.append(this.$note);                       //容器
+      if(!this.id) {
+        this.$note.attr('id','atarget').css({ top: '-30px' });
+        // Event.fire('waterfall');
 
-      Event.fire('waterfall');         //触发瀑布流事件
-  },
+
+      }
+        this.setStyle();
+        Event.fire('waterfall');
+        if ($(window).scrollTop() > 50) {
+            $("html,body").animate({scrollTop: $("#atarget").offset().top}, 1000);
+        } else {
+            this.$note.removeAttr('id','atarget');
+        }
+
+    },
 
   setStyle: function () {
     var headcolors = ['#ea9b35', '#dd598b', '#eee34b', '#c24226', '#c1c341', '#3f78c3'];
@@ -971,12 +970,13 @@ Note.prototype = {
     var ctcolor = ctcolors[Math.floor(Math.random() * 6)];              //颜色随机于color
     this.$note.find('.note-head').css('background-color', headcolor);      //标题的背景色
     this.$note.find('.note-ct').css('background-color', ctcolor);        //内容的背景色
+    this.bindEvent()
   },
 
   setLayout: function(){                      //设置布局
     var self = this;                      
-    if(self.clk){                             //有的话结束定时器
-      clearTimeout(self.clk);
+    if( self.clk ){                             //有的话结束定时器
+      clearTimeout( self.clk );
     }
     self.clk = setTimeout(function(){         //设置定时器
       Event.fire('waterfall');                //事件 瀑布流 执行
@@ -988,7 +988,9 @@ Note.prototype = {
         $note = this.$note, 
         $noteHead = $note.find('.note-head'),
         $noteCt = $note.find('.note-ct'),
-        $delete = $note.find('.delete');
+        $delete = $note.find('.delete'),
+        $noteTime = $note.find('.time'),
+        beforCt = $noteCt.html();
 
     $delete.on('click', function(){            //点击触发——删除
       self.delete();
@@ -996,21 +998,27 @@ Note.prototype = {
 
     //contenteditable没有 change 事件，所有这里做了模拟通过判断元素内容变动，执行 save
     $noteCt.on('focus', function() {                          //焦点于内容
-      if($noteCt.html()=='请输入内容...') $noteCt.html('');      //如果内容是...那么清空
-      $noteCt.data('before', $noteCt.html());                 //描述: 在匹配元素上存储任意相关数据.
-    }).on('blur paste', function(e) {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
-      if( $noteCt.data('before') != $noteCt.html() ) {        //如果元素内容 ！= X
-        $noteCt.data('before',$noteCt.html());                //内容合并 X
-        self.setLayout();                                     //调用函数————setLayout（）
+      if($noteCt.html() === '请输入内容...') $noteCt.html('');      //如果内容是...那么清空
+      $noteCt.data('before', beforCt);                 //描述: 在匹配元素上存储任意相关数据.
+    }).on('blur paste', function() {                          //paste向一个选中区域粘贴剪切板内容的时候，会触发粘贴事件
+      if( $noteCt.data('before') != $noteCt.html() ) {
+        if( $noteCt.html() === '' || $noteCt.html() == '<br>'){
+          $noteCt.html(beforCt);
+          Toast('内容不能为空..');
+          return
+        }
+        // $noteCt.data('before',$noteCt.html());                //内容合并 X
+        // self.setLayout();                                     //调用函数————setLayout（）
         if(self.id){                                          //有id吗0,0？
-          self.edit($noteCt.html())                           //有即编辑内容
+          self.edit($noteCt, $noteTime)                           //有即编辑内容
         }else{
           self.add($noteCt.html())                            //无即添加
         }
+          self.setLayout();
       }
     });
 
-    //设置笔记的移动
+    //点击头部拖动
     $noteHead.on('mousedown', function(e){                          //鼠标按下触发
       var evtX = e.pageX - $note.offset().left,                     //evtX 计算事件的触发点在dialog
           evtY = e.pageY - $note.offset().top;                      //内部到 dialog 的左边缘的距离
@@ -1027,15 +1035,18 @@ Note.prototype = {
     });
   },
 
-  edit: function (msg) {              //编辑内容
-    var self = this;
+  edit: function ($noteCt, $noteTime) {              //编辑内容
+    var beforeCt = $noteCt.data('before');
+    var msg = $noteCt.html();
     $.post('/api/notes/edit',{        //使用一个HTTP POST 请求从服务器加载数据。
         id: this.id,    
         note: msg
       }).done(function(ret){          //请求完成数据到来
       if(ret.status === 0){           //状态成功
-        Toast('更新成功 | UPDATE SUCCESS');      //提示
+        Toast('更新成功 | UPDATE SUCCESS');
+        $noteTime.html( new Date().toLocaleString('chinese', { hour12: false }) );
       }else{
+        $noteCt.html( beforeCt );
         Toast(ret.errorMsg);          //提示失败
       }
     })
@@ -1045,10 +1056,8 @@ Note.prototype = {
     var self = this;
     $.post('/api/notes/add', {
       note: msg
-    })                                    //请求，数据内容为msg
-      .done(function(ret){                //数据到来
+    }).done(function(ret){                //数据到来
         if(ret.status === 0){
-
             self.$note.remove();
             new Note({
                 id: ret.result.id,
@@ -1056,11 +1065,9 @@ Note.prototype = {
                 update: new Date(parseInt(ret.result.updatedAt)).toLocaleString('chinese', { hour12: false }),
                 username: ret.result.username
             });
-
           Toast('新增成功 | ADD SUCCESS');           //成功
         }else{
           self.$note.remove();            //移除元素
-          // Event.fire('waterfall');         //触发瀑布流事件
           Toast(ret.errorMsg);            //提示
         }
       });
@@ -1068,7 +1075,7 @@ Note.prototype = {
 
   delete: function(){                           //Dle
     var self = this;
-    $.post('/api/notes/delete', {id: this.id})  //请求数据，内容Id
+    $.post('/api/notes/delete', { id: this.id })  //请求数据，内容Id
       .done(function(ret){                      //数据
         if(ret.status === 0){                   //成功
           Toast('删除成功 | DELETE SUCCESS');    //提示
@@ -1078,11 +1085,10 @@ Note.prototype = {
           Toast(ret.errorMsg);                  //提示
         }
     });
-
   }
 };
 
-module.exports.Note = Note;                     //模块入口
+module.exports = Note;                     //模块入口
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
@@ -1135,29 +1141,28 @@ exports.push([module.i, ".note {\n  position: absolute;\n  width: 230px;\n  text
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {
-var WaterFall = (function(){        //瀑布
-  var $ct;                          //容器
-  var $items;                       //列表
+var WaterFall = (function(){
+  var $ct;
+  var $items;
 
-  function render($c){              //渲染
-    $ct = $c;                       //保存参数
-    $items = $ct.children();        //保存儿子
+  function render($c){
+    $ct = $c;
+    $items = $ct.children();
 
     var nodeWidth = $items.outerWidth(true),          //元素的整体宽
-      colNum = parseInt($(window).width()/nodeWidth), //窗口宽度 / 元素宽 = 该行元素的个数～
+      colNum = parseInt($(window).width() / nodeWidth), //窗口宽度 / 元素宽 = 该行元素的个数～
       colSumHeight = [];                              //来个空数组
     
-    for(var i = 0; i<colNum;i++){                     //循环每个元素设置值为0
+    for(var i = 0; i < colNum; i++){                     //循环每个元素设置值为0
       colSumHeight.push(0);
     }
 
     $items.each(function(){                           //遍历
       var $cur = $(this);                             //保存this
-
       var idx = 0,                                    //基点
-        minSumHeight = colSumHeight[0];               //最小的？ = 数组第一个元素
+          minSumHeight = colSumHeight[0];               //最小的？ = 数组第一个元素
 
-      for(var i=0;i<colSumHeight.length; i++){        //信用不够严数组
+      for(var i = 0; i < colSumHeight.length; i++){        //信用不够严数组
         if(colSumHeight[i] < minSumHeight){           //当循环到数组某个元素比 最小的？小
           idx = i;                                    //下标取代i
           minSumHeight = colSumHeight[i];             //最小的？ 等于这个值
@@ -1172,11 +1177,9 @@ var WaterFall = (function(){        //瀑布
     });
   }
 
-
   $(window).on('resize', function(){                  //当窗口调整，触发render渲染
     render($ct);
-  })
-
+  });
 
   return {                                            //返回init
     init: render
@@ -1264,13 +1267,13 @@ HideNav.prototype = {
         $(window).on('scroll', function() {
             var scrollTop = $(window).scrollTop();
                 if (now > befor) {
-                    _this.tagnode.fadeOut(1000);
+                    _this.tagnode.fadeOut(500);
                     befor = now;
                     now = scrollTop;
                     // console.log('b = '+ befor);
                     // console.log('n = '+ now);
                 } else if (now <= befor){
-                    _this.tagnode.fadeIn(1000);
+                    _this.tagnode.fadeIn(500);
                     befor = now;
                     now = scrollTop;
                     // console.log('-b = '+ befor);

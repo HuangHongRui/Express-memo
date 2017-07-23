@@ -1,15 +1,16 @@
+
 var Sequelize = require('sequelize');    //请求数据库
 var path = require('path');
 
 //建立连接
 var sequelize = new Sequelize(undefined, undefined, undefined, {
-  host: 'localhost',
-  dialect: 'sqlite',                     //采用sqlite数据库
-  storage: path.join(__dirname, '../database/database.sqlite')
+    host: 'localhost',
+    dialect: 'sqlite',                     //采用sqlite数据库
+    storage: path.join(__dirname, '../database/database.sqlite')
 });                                      //数据库路径
 
 //模型
-const Note = sequelize.define('note', {
+var Note = sequelize.define('note', {
     text: {
         type: Sequelize.STRING
     },
@@ -28,9 +29,9 @@ const Note = sequelize.define('note', {
 }, {
     timestamps: false
 });
-Note.sync();                             //同步模型到数据库 //{force: true}
+Note.sync();                     //同步模型到数据库 //{force: true}
 
-module.exports.Note = Note;              //出口
+module.exports = Note;              //出口
 
 // Note.sync(true)
 // Note.sync({force: true}) //重置

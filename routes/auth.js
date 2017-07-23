@@ -46,6 +46,6 @@ router.get('/github/callback',
             provider: req.user.provider         //提供者
         };
         res.redirect('/');                      //重定向
-});
+    });
 
 module.exports = router;

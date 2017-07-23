@@ -16,13 +16,13 @@ HideNav.prototype = {
         $(window).on('scroll', function() {
             var scrollTop = $(window).scrollTop();
                 if (now > befor) {
-                    _this.tagnode.fadeOut(1000);
+                    _this.tagnode.fadeOut(500);
                     befor = now;
                     now = scrollTop;
                     // console.log('b = '+ befor);
                     // console.log('n = '+ now);
                 } else if (now <= befor){
-                    _this.tagnode.fadeIn(1000);
+                    _this.tagnode.fadeIn(500);
                     befor = now;
                     now = scrollTop;
                     // console.log('-b = '+ befor);
