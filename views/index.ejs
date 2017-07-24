@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>|备忘录|</title>
+    <link rel="shortcut icon" href="http://luckyman.xyz/img/ico/favicon.ico">
+    <title> 便笺 | Memo </title>
 </head>
 <body>
 <div id="header">
@@ -11,13 +12,13 @@
         <% if (isLogin){ %>
         <li><img src="<%= user.avatar %>" alt=""></li>
         <li><span class="username" title="<%= user.username %>"><%= user.username %></span></li>
-        <!--<li><span class="line">|</span></li>-->
         <li><a class="logout" href="/auth/logout">注销</a></li>
         <%} else { %>
-        <li><a class="login" title="GitHub登录" href="/auth/github"> 登录>>GitHub </a></li>
+        <li><a class="login" title="Login." href="/auth/github"> 登录>>GitHub </a></li>
         <% } %>
     </ul>
-    <a class="add-note" title="添加小记" href="javascript:void(0)"><span class="fa fa-plus"></span> 添加小记 </a>
+    <a title="Author" target="_blank" href="https://github.com/HuangHongRui/Express-memo"><i class="icon">&#xe612;</i></a>
+    <a class="add-note" title="Add" href="javascript:void(0)"><span class="fa fa-plus"></span> 添加便笺 </a>
 </div>
 <div id="content">
 

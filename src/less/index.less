@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Bree+Serif|Cabin:600|Chewy');
-
+@font-face {
+  font-family: 'iconfont';  /* project id 360873 */
+  src: url('//at.alicdn.com/t/font_cgjvrf1rlik9.eot');
+  src: url('//at.alicdn.com/t/font_cgjvrf1rlik9.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_cgjvrf1rlik9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_cgjvrf1rlik9.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_cgjvrf1rlik9.svg#iconfont') format('svg');
+}
 
 html,body{
   margin: 0;
@@ -29,18 +36,19 @@ a{
   max-height: 30px;
   width: 100%;
   z-index: 10;
-  display:flex;
-  opacity: 0.7;
+  opacity: 0.5;
   align-items:center;
   padding:10px;
   //justify-content:center;
   background-color: #ccc;
+  display:flex;
   flex-direction:row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  user-select: none;
 
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
   }
   a {
     display: block;
@@ -81,12 +89,29 @@ a{
     }
   }
 
+
+    .icon {
+      font-family: 'iconfont';
+      font-size: 30px;
+      font-style: normal;
+      margin-left: -65px;
+      cursor: pointer;
+      color: #d81e06;
+      &:hover {
+        color: #1296db;
+      }
+    }
+
     .add-note, .login, .logout{
       border: 1px solid #fff;
       border-radius: 4px;
       padding: 2px 4px;
-      margin: 0  30px;
+      margin: 0  55px;
       z-index: 20;
+    }
+
+    .add-note {
+      margin-right:115px;
     }
 
     .user-area .login , .user-area .logout , .add-note {

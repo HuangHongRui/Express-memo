@@ -31,7 +31,7 @@ Note.prototype = {
       this.$note = $(tpl);
       this.$note.find('.time').html(this.opts.update);
       this.$note.find('.username').html(this.opts.username);
-      console.log(this.opts.username)
+      // console.log(this.opts.username)
       this.$note.find('.note-ct').html(this.opts.context);
       this.opts.$ct.append(this.$note);
       if(!this.id) {

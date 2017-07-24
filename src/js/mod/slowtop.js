@@ -27,7 +27,8 @@ GoTop.prototype = {
             'border-right': 'none',
             'background-color': 'rgba(200,200,200,0.6)',
             'font-weight': 800,
-            'display': 'none'
+            'display': 'none',
+            'user-select': 'none'
     });
         $('body').append(this.target)
     },
