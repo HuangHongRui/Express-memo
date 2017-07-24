@@ -1,22 +1,51 @@
-# Express-memo
+# 便笺 |  Express-Memo
 
 ---
 
-### 备忘录 | 便利贴 > 项目 .
+### 预览
 
-1. 用 基于 Node.js 的 Espress 框架
-2. 实现 增删改查 .
-3. 实现 Github登录 操作
-4.目前要调整显示的整体位置.
-5. 添加置顶功能 | 导航条的自动隐藏
-6. 修复添加笔记时，输入框显示的位置
-7. 增加添加笔记时，焦点跳转到对应的笔记。
-7. note 的样式皮肤
-9. 信息来至于某人
-9. 来个通告 {告知基本使用法}
+- 地址：[便笺 | Memo](http://memo.luckyman.xyz/)
+
+### 功能
+
+使用 Express （基于Node.js）来实现在线粘贴 ，功能包括：
+
+- 实现 Github登录
+- 增加 / 删除 / 更改 >> 便笺
+- 显示便签拥有者昵称
+- 显示创建 / 更改时间
+
+### 涉及技术栈
+
+- 前端：前端代码结构的组织、模块化开发方式、webpack 及loader和插件的使用、npm 的使用、前后端联调
+- 后端：网站后端架构、MVC概念、Express的使用、路由、中间件、sqlite3、nodejs 调试
+- 运维： linux 命令行、git、pm2、代理配置
 
 
+### 运行方法
 
-8.   兼容手机
-1. 拥有管理员权限
-4. 实现个人私密 文件
+- git clone git@github.com:HuangHongRui/Express-memo.git
+- npm install --verbose
+- node ./bin/www
+- http://localhost:3000/
+
+### 所需技能
+
+- HTML+CSS
+- LESS
+- jQuery
+- Node.js
+- Express ([应用程序框架](http://expressjs.com/))
+- sequelize ([数据库](http://docs.sequelizejs.com/manual/installation/getting-started))
+- passport ([Github Login](https://www.npmjs.com/package/passport-github))
+- ejs ([模板](https://www.npmjs.com/package/ejs))
+- webpack ([神器](https://webpack.github.io/docs/))
+
+
+### 作者
+- [HuangHongRui](https://github.com/HuangHongRui)
+
+
+###联系方式
+- **Wechat：**  hr464362353
+- **Email：**    464362353@qq.com
