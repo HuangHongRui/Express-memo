@@ -4,7 +4,7 @@
 
 ### **预览**
 
-- 地址：[便笺 | Memo](http://memo.luckyman.xyz/)
+- 地址：[便笺 | Memo](http://memo.sunnyman.club/)
 
 ### **功能**
 
