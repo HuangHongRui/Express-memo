@@ -21,7 +21,7 @@ passport.deserializeUser((obj, done) => {
 passport.use(new GitHubStrategy({
         clientID: '600246c4be6c231d5210',                               //id
         clientSecret: '3eeb85b722458949b52ea8db9fbf5a6c00899366',       //秘钥
-        callbackURL: "http://memo.luckyman.xyz/auth/github/callback"    //回调
+        callbackURL: "http://memo.sunnyman.club/auth/github/callback"    //回调
     },
     (accessToken, refreshToken, profile, done) => {
         done(null, profile)
